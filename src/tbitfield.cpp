@@ -137,16 +137,16 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
         result.pMem[i] = this->pMem[i] & bf.pMem[i];
     }
 
-    if (this->BitLen > bf.BitLen) {
+    /*if (this->BitLen > bf.BitLen) {
         for (int i = minMemLen; i < this->MemLen; ++i) {
-            result.pMem[i] = this->pMem[i];
+            result.pMem[i] = 0;
         }
     }
-    else if (bf.BitLen > this->BitLen) {
+    else if (this->BitLen < bf.BitLen) {
         for (int i = minMemLen; i < bf.MemLen; ++i) {
-            result.pMem[i] = bf.pMem[i];
+            result.pMem[i] = 0;
         }
-    }
+    }*/
 
     return result;
 }
