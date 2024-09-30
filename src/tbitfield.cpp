@@ -161,7 +161,7 @@ TBitField TBitField::operator~(void) // отрицание
 
     int lastBits = this->BitLen % (sizeof(TELEM) * 8);
     if (lastBits > 0) {
-        TELEM mask = (1 << lastBits) - 1;
+        TELEM mask = static_cast<TELEM>((1ULL << lastBits) - 1);
         result.pMem[this->MemLen - 1] &= mask;
     }
 
@@ -188,7 +188,9 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
     for (int i = 0; i < bf.BitLen; ++i) {
-        ostr << bf.GetBit(i);
+        if (bf.GetBit(i) != 0)
+            ostr << '1'; // Исправленный вывод
+        else ostr << '0';
     }
     return ostr;
 }
