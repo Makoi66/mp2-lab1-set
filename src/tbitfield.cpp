@@ -164,6 +164,12 @@ TBitField TBitField::operator~(void) // отрицание
         TELEM mask = static_cast<TELEM>((1ULL << lastBits) - 1);
         result.pMem[this->MemLen - 1] &= mask;
     }
+    else if (this->BitLen != this->MemLen * sizeof(TELEM) * 8 && this->MemLen > 0) {
+        result.pMem[this->MemLen - 1] = this->pMem[this->MemLen - 1]; // оставляем последний элемент как есть
+    }
+
+
+    return result;
 
     return result;
 }
